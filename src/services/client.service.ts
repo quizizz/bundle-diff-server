@@ -15,7 +15,7 @@ export async function checkForUpdate(
   const updateCheckInfo: UpdateCheckInfo = {
     packageId: 0,
     downloadURL:
-      'https://drive.google.com/uc?export=download&id=1GTsfRchLQ7-Zz-1auKqDzrlLcNG0Y01X',
+      'https://drive.google.com/uc?export=download&id=1bnTmtBO5JForqxGMbYuuwmQ_UIEFEJlq',
     isAvailable: true,
     isDisabled: false,
     isMandatory: false,
