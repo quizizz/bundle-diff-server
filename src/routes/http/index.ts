@@ -7,9 +7,9 @@ import Config from '@app/config';
 import MiddlewareFactory from '@app/middlewares/factory.middleware';
 import type { ControllerFactory } from '@app/routes/handlers/handler.factory';
 import type BaseController from '@app/controllers/base.controller';
-import MathsController from '@app/controllers/maths.controller';
 import { MetaController, NotFoundController } from '@app/controllers';
 import { HealthController } from '@app/controllers/meta.controller';
+import ClientController from '@app/controllers/client.controller';
 
 /**
  *
@@ -38,8 +38,8 @@ export class HttpRoutes {
     private healthController: HealthController,
     @inject(components.NOT_FOUND_CONTROLLER)
     private notFoundController: NotFoundController,
-    @inject(components.MATHS_CONTROLLER)
-    private mathsController: MathsController,
+    @inject(components.CLIENT_CONTROLLER)
+    private clientController: ClientController,
     @inject(components.CONFIG) private config: Config,
     @inject(components.LOGGER) private logger: ILogger,
     @inject(components.MIDDLEWARE_FACTORY)
@@ -75,13 +75,8 @@ export class HttpRoutes {
     return this.register(Router(), [
       {
         method: 'post',
-        route: '/maths/add',
-        controller: this.mathsController.add(),
-      },
-      {
-        method: 'post',
-        route: '/maths/subtract',
-        controller: this.mathsController.subtract(),
+        route: '/client/update_check',
+        controller: this.clientController.checkForUpdate(),
       },
     ]);
   }

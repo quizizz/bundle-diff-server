@@ -14,3 +14,16 @@ export type RequestMethod =
   | 'PUT'
   | 'UNKNOWN'
   | 'KAFKA';
+
+export interface UpdateCheckInfo {
+  packageId: number;
+  downloadURL: string;
+  isAvailable: boolean;
+  isDisabled: boolean; // If we do a rollback
+  isMandatory: boolean;
+  appVersion: string;
+  targetBinaryRange: string;
+  packageHash: string;
+  label: string;
+  packageSize: number;
+}

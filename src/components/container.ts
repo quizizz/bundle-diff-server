@@ -23,8 +23,8 @@ import {
 } from '@app/controllers/meta.controller';
 import AsyncStorageService from '@app/services/async-storage.service';
 import KafkaWorker from '@app/apps/kafka.app';
-import MathsController from '@app/controllers/maths.controller';
 import MiddlewareFactory from '@app/middlewares/factory.middleware';
+import ClientController from '@app/controllers/client.controller';
 
 /**
  * Inits DI container
@@ -118,8 +118,8 @@ function createDependencyContainer() {
     .inSingletonScope();
 
   container
-    .bind<MathsController>(components.MATHS_CONTROLLER)
-    .to(MathsController)
+    .bind<ClientController>(components.CLIENT_CONTROLLER)
+    .to(ClientController)
     .inSingletonScope();
 
   /** -------------------------------- Services -------------------------------- */

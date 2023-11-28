@@ -27,7 +27,7 @@ export default {
   HEALTH_CONTROLLER: Symbol.for('health_controller'),
   NOT_FOUND_CONTROLLER: Symbol.for('not_found_controller'),
   EXAMPLE_KAFKA_CONTROLLER: Symbol.for('example_kafka_controller'),
-  MATHS_CONTROLLER: Symbol.for('maths_controller'),
+  CLIENT_CONTROLLER: Symbol.for('CLIENT_CONTROLLER'),
 
   // services
   ASYNC_STORAGE_SERVICE: Symbol.for('async_storage_service'),
