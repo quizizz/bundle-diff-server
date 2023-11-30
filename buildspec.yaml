@@ -41,7 +41,6 @@ phases:
   post_build:
     commands:
       - echo "Associating commits on Sentry"
-      - bash scripts/attachCommitsOnSentry.sh
       - echo "Pushing on ECR"
       - |
         docker push $CURRENT_IMAGE \
