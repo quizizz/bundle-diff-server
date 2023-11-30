@@ -11,7 +11,7 @@ phases:
   pre_build:
     commands:
       - echo "Logging into ecr"
-      - $(aws ecr get-login --no-include-email --region us-east-1)
+      - $(aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 399771530480.dkr.ecr.us-east-1.amazonaws.com)
       - ts=$(date +%s)
       - echo "ComponentName = ${componentName} | ComponentType = ${componentType} | Repository = ${image_repository}"
       - CURRENT_IMAGE="${image_repository}/${env}/${componentType}:${componentName}_${version}_${ts}"
