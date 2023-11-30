@@ -10,7 +10,6 @@ import express, {
   Response as ExpressResponse,
   Router,
 } from 'express';
-import KafkaResource from '@app/resources/kafka-resource';
 import { ILogger } from '@app/core/logger';
 import components from '@app/components';
 import { ErrorHandler } from '@app/errors/error-handler';
@@ -31,16 +30,12 @@ export default class HttpServer {
 
     // Resources
     @inject(components.EXAMPLE) private exampleResource: ExampleResource,
-    @inject(components.KAFKA) private kafkaResource: KafkaResource,
   ) {
     this.app = express();
   }
 
   async boot() {
-    await this.bootstrap
-      .withResource(this.exampleResource)
-      .withResource(this.kafkaResource)
-      .load();
+    await this.bootstrap.withResource(this.exampleResource).load();
 
     this.app.use(bodyParser.json({ limit: '10mb' }));
     this.app.use(cookieParser());

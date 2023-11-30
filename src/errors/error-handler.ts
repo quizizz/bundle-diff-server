@@ -1,4 +1,3 @@
-import KafkaResource from '@app/resources/kafka-resource';
 import { RequestMethod } from '@app/types';
 import BaseError from '@app/errors/base.error';
 import { injectable, inject } from 'inversify';
@@ -28,11 +27,6 @@ export interface ErrorHandler {
     res?: ExpressResponse,
     ctx?: Context,
   ): Promise<void>;
-  handleKafkaError(
-    ex: BaseError | Error,
-    req?: Request<any, any, any>,
-    topic?: string,
-  ): Promise<void>;
 }
 
 interface ErrorHandlerOpts {
@@ -54,7 +48,6 @@ export class ErrorHandlerSentry implements ErrorHandler {
   constructor(
     @inject(components.ENV) private processEnv: ProcessEnv,
     @inject(components.CONFIG) private config: Config,
-    @inject(components.KAFKA) private kafka: KafkaResource,
     @inject(components.EMITTER) private emitter: Emitter,
     @inject(components.LOGGER) private logger: ILogger,
     @inject(components.ASYNC_STORAGE_SERVICE)
@@ -127,10 +120,10 @@ export class ErrorHandlerSentry implements ErrorHandler {
     const formattedError = this.genMsg(ex as BaseError, opts);
 
     if (this.config.env === 'prod') {
-      this.kafka.getProducer().produce({
-        topic: `errors.${this.processEnv.componentType}`,
-        message: formattedError,
-      });
+      // this.kafka.getProducer().produce({
+      //   topic: `errors.${this.processEnv.componentType}`,
+      //   message: formattedError,
+      // });
     }
 
     // @ts-expect-error We're wrapping the Error class if an unhandled error is found
@@ -167,25 +160,25 @@ export class ErrorHandlerSentry implements ErrorHandler {
     });
   }
 
-  async handleKafkaError(
-    ex: BaseError | Error,
-    req?: Request<any, any, any>,
-    topic?: string,
-  ) {
-    await this.handle(ex, {
-      request: {
-        body: req?.body,
-        data: {
-          topic,
-          body: req?.body,
-        },
-      } as Record<string, any>,
-      topic,
-      details: (ex as BaseError)?.context,
-      method: 'KAFKA',
-      route: topic,
-    });
-  }
+  // async handleKafkaError(
+  //   ex: BaseError | Error,
+  //   req?: Request<any, any, any>,
+  //   topic?: string,
+  // ) {
+  //   await this.handle(ex, {
+  //     request: {
+  //       body: req?.body,
+  //       data: {
+  //         topic,
+  //         body: req?.body,
+  //       },
+  //     } as Record<string, any>,
+  //     topic,
+  //     details: (ex as BaseError)?.context,
+  //     method: 'KAFKA',
+  //     route: topic,
+  //   });
+  // }
 
   wrapUnhandledError(err: Error): Error {
     const parsedStack: CaptureAndParseStackReturnValue = err.stack

@@ -10,8 +10,6 @@ import { ControllerFactory } from '@app/routes/handlers/handler.factory';
 import { HttpRoutes } from '@app/routes/http';
 import { ErrorHandler, ErrorHandlerSentry } from '@app/errors/error-handler';
 import Config from '@app/config';
-import { KafkaRoutes } from '@app/routes/kafka';
-import KafkaResource from '@app/resources/kafka-resource';
 import ExampleResource from '@app/resources/example-resource';
 import { ProcessEnv } from '@app/core/process-env';
 import Emitter from '@app/core/emitter';
@@ -22,7 +20,6 @@ import {
   HealthController,
 } from '@app/controllers/meta.controller';
 import AsyncStorageService from '@app/services/async-storage.service';
-import KafkaWorker from '@app/apps/kafka.app';
 import MiddlewareFactory from '@app/middlewares/factory.middleware';
 import ClientController from '@app/controllers/client.controller';
 
@@ -60,19 +57,11 @@ function createDependencyContainer() {
   container
     .bind<interfaces.Factory<HttpServer>>(components.HTTP_FACTORY)
     .toAutoFactory<HttpServer>(components.HTTP_SERVER);
-  container.bind<KafkaWorker>(components.KAFKA_WORKER).to(KafkaWorker);
-  container
-    .bind<interfaces.Factory<KafkaWorker>>(components.KAFKA_FACTORY)
-    .toAutoFactory<KafkaWorker>(components.KAFKA_WORKER);
 
   /** -------------------------------- Routes -------------------------------- */
   container
     .bind<HttpRoutes>(components.HTTP_ROUTES)
     .to(HttpRoutes)
-    .inSingletonScope();
-  container
-    .bind<KafkaRoutes>(components.KAFKA_ROUTES)
-    .to(KafkaRoutes)
     .inSingletonScope();
   container
     .bind<MiddlewareFactory>(components.MIDDLEWARE_FACTORY)
@@ -81,10 +70,6 @@ function createDependencyContainer() {
 
   /** -------------------------------- Resources  -------------------------------- */
 
-  container
-    .bind<KafkaResource>(components.KAFKA)
-    .to(KafkaResource)
-    .inSingletonScope();
   container
     .bind<ExampleResource>(components.EXAMPLE)
     .to(ExampleResource)

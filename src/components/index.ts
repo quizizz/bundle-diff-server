@@ -10,9 +10,6 @@ export default {
   HTTP_FACTORY: Symbol.for('factory<http_server>'),
   CONTROLLER_FACTORY: Symbol.for('factory<controller>'),
   HTTP_ROUTES: Symbol.for('http_routes'),
-  KAFKA_ROUTES: Symbol.for('kafka_routes'),
-  KAFKA_WORKER: Symbol.for('kafka_worker'),
-  KAFKA_FACTORY: Symbol.for('factory<kafka_worker>'),
   ERROR_HANDLER: Symbol.for('error_handler'),
   CONFIG: Symbol.for('config'),
   MIDDLEWARE_FACTORY: Symbol.for('middleware_factory'),
@@ -20,7 +17,6 @@ export default {
 
   // resources
   EXAMPLE: Symbol.for('example'),
-  KAFKA: Symbol.for('kafka_resource'),
 
   // controllers
   META_CONTROLLER: Symbol.for('meta_controller'),

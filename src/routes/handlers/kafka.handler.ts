@@ -128,7 +128,6 @@ export default class KafkaController {
       } catch (err) {
         const _error = BaseError.from(err);
         this.logResponse(_error, req);
-        this.errorHandler.handleKafkaError(_error, req, topic);
       }
     });
   }

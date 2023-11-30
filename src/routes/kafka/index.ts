@@ -1,4 +1,3 @@
-import KafkaResource from '@app/resources/kafka-resource';
 import BaseController from '@app/controllers/base.controller';
 import { ControllerFactory } from '@app/routes/handlers/handler.factory';
 import {
@@ -22,15 +21,10 @@ export class KafkaRoutes {
     private healthController: HealthController,
     @inject(components.EXAMPLE_KAFKA_CONTROLLER)
     private exampleKafkaController: ExampleKafkaController,
-    @inject(components.KAFKA) private kafka: KafkaResource,
   ) {}
 
   async registerTopic(topic: string, controller: BaseController<any>) {
     const execFn = this.factory.createKafkaController(controller);
-    const consumer = await this.kafka.createConsumer(topic);
-    consumer.listen(async (msg) => {
-      await execFn(msg);
-    });
   }
 
   async registerAllTopics() {
