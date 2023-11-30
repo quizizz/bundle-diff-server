@@ -41,6 +41,5 @@ junit.xml
 .env.local
 .env.test
 
-yarn.lock
 
 tmp
