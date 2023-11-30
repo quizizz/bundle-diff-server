@@ -1,4 +1,4 @@
-FROM 399771530480.dkr.ecr.us-east-1.amazonaws.com/node:20
+FROM 399771530480.dkr.ecr.us-east-1.amazonaws.com/node:18
 
 ARG env
 ARG kind
@@ -9,9 +9,6 @@ ARG version
 ARG appType
 ARG commitId
 ARG componentType
-ARG sentryDSN
-ARG sentryAuthToken
-ARG sentryGitRepo
 
 RUN mkdir -p /usr/app
 WORKDIR /usr/app
@@ -22,16 +19,9 @@ COPY scripts /usr/app/scripts
 COPY package.json .
 COPY tsconfig.json .
 COPY tsconfig.build.json .
-COPY .sentryclirc .
-
-ENV SENTRY_DSN=${sentryDSN}
-ENV SENTRY_AUTH_TOKEN=${sentryAuthToken}
-ENV SENTRY_GIT_REPO=${sentryGitRepo}
 
 RUN npm install --quiet
 RUN npm run build:ci
-RUN npm install @sentry/cli
-RUN bash scripts/releaseOnSentry.sh
 
 ENV NODE_ENV=${env}
 ENV NODE_SERVER_PORT=8080
