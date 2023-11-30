@@ -24,6 +24,7 @@ phases:
       - echo "Building docker image"
       - |
         docker build \
+          --cache-from=$LATEST_IMAGE \
           -t $CURRENT_IMAGE \
           -f Dockerfile \
           . \
@@ -34,9 +35,6 @@ phases:
           --build-arg version=$version \
           --build-arg apiver=$componentName \
           --build-arg commitId=$commitId \
-          --build-arg sentryDSN=$SENTRY_DSN \
-          --build-arg sentryAuthToken=$SENTRY_AUTH_TOKEN \
-          --build-arg sentryGitRepo=$SENTRY_GIT_REPO
       - docker tag $CURRENT_IMAGE $LATEST_IMAGE
   post_build:
     commands:
