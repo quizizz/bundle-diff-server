@@ -5,7 +5,7 @@ phases:
     runtime-versions:
       nodejs: 18
     commands:
-      - n 16
+      - n 18
       - echo "Nothing to install here"
 
   pre_build:
