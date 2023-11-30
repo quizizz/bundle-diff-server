@@ -24,7 +24,6 @@ phases:
       - echo "Building docker image"
       - |
         docker build \
-          --cache-from=$LATEST_IMAGE \
           -t $CURRENT_IMAGE \
           -f Dockerfile \
           . \
