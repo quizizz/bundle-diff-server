@@ -25,5 +25,5 @@ export interface UpdateCheckInfo {
   package_hash: string | null;
   size: number | null;
   is_update_available: boolean;
-  is_rollout_disabled: boolean;
+  should_rollback: boolean;
 }

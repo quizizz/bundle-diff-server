@@ -38,7 +38,7 @@ export async function checkForUpdate(
     package_hash: '123',
     size: 100,
     is_update_available: true,
-    is_rollout_disabled: false,
+    should_rollback: false,
   };
 
   return updateCheckInfo;
