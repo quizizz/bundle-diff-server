@@ -1,5 +1,6 @@
 import { ANDROID_APP_ID, IOS_APP_ID } from '@app/constants';
 import { UpdateCheckInfo } from '@app/types';
+import { calculateSHA256 } from '@app/utils/md5';
 
 export interface CheckForUpdateArgs {
   app_version: string;
@@ -27,6 +28,9 @@ export async function checkForUpdate(
   } else if (args.app_id === ANDROID_APP_ID) {
     blob_url = android_patch_url;
   }
+  const data = 'Some data'; // replace with new bundle data
+  const package_hash = calculateSHA256(data);
+
   const updateCheckInfo: UpdateCheckInfo = {
     app_version: args.app_version,
     app_id: args.app_id,
@@ -34,7 +38,7 @@ export async function checkForUpdate(
     deployment_key: args.deployment_key,
     label: 'Updating themes in the app',
     blob_url: blob_url,
-    package_hash: '123',
+    package_hash: package_hash,
     size: 100,
     is_update_available: true,
     should_rollback: false,
