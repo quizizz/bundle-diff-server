@@ -21,7 +21,8 @@ export async function checkForUpdate(
     package_id: 'package_id_1',
     deployment_key: args.deployment_key,
     label: 'Updating themes in the app',
-    blob_url: 'https://suraj.coolpage.biz/patch-android-2',
+    blob_url:
+      'https://quizizz-static-dev.s3.amazonaws.com/app_bundles/patch-android',
     package_hash: '123',
     size: 100,
     is_update_available: true,
