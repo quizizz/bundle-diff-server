@@ -6,6 +6,7 @@ import {
   CheckForUpdateArgs,
   checkForUpdate,
 } from '@app/services/client.service';
+import { ANDROID_APP_ID, IOS_APP_ID } from '@app/constants';
 
 @injectable()
 export default class ClientController {
@@ -40,6 +41,18 @@ export default class ClientController {
           return {
             error: {
               details: [{ message: 'app_id must be a string' }],
+            },
+            value: req,
+          };
+        }
+        if (app_id !== IOS_APP_ID && app_id !== ANDROID_APP_ID) {
+          return {
+            error: {
+              details: [
+                {
+                  message: `Invalid app_id. Must be either ${ANDROID_APP_ID} or ${IOS_APP_ID}`,
+                },
+              ],
             },
             value: req,
           };

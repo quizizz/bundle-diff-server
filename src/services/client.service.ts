@@ -1,3 +1,4 @@
+import { ANDROID_APP_ID, IOS_APP_ID } from '@app/constants';
 import { UpdateCheckInfo } from '@app/types';
 
 export interface CheckForUpdateArgs {
@@ -7,8 +8,6 @@ export interface CheckForUpdateArgs {
   package_id: string | null;
 }
 
-const ios_app_id = 'com.quizizz.game';
-const android_app_id = 'com.quizizz.mobile';
 const android_patch_url =
   'https://quizizz-static-dev.s3.amazonaws.com/app_bundles/patch-android';
 const ios_patch_url =
@@ -23,9 +22,9 @@ export async function checkForUpdate(
   args: CheckForUpdateArgs,
 ): Promise<UpdateCheckInfo> {
   let blob_url = '';
-  if (args.app_id === ios_app_id) {
+  if (args.app_id === IOS_APP_ID) {
     blob_url = ios_patch_url;
-  } else if (args.app_id === android_app_id) {
+  } else if (args.app_id === ANDROID_APP_ID) {
     blob_url = android_patch_url;
   }
   const updateCheckInfo: UpdateCheckInfo = {
