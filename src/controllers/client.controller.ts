@@ -50,7 +50,7 @@ export default class ClientController {
             error: {
               details: [
                 {
-                  message: `Invalid app_id. Must be either ${ANDROID_APP_ID} or ${IOS_APP_ID}`,
+                  message: `Invalid app_id`,
                 },
               ],
             },
