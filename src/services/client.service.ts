@@ -1,7 +1,10 @@
 import { UpdateCheckInfo } from '@app/types';
 
 export interface CheckForUpdateArgs {
-  appVersion: string;
+  app_version: string;
+  app_id: string;
+  deployment_key: string;
+  package_id: string | null;
 }
 
 /**
@@ -13,16 +16,16 @@ export async function checkForUpdate(
   args: CheckForUpdateArgs,
 ): Promise<UpdateCheckInfo> {
   const updateCheckInfo: UpdateCheckInfo = {
-    packageId: 0,
-    downloadURL: 'https://suraj.coolpage.biz/patch-android-2',
-    isAvailable: true,
-    isDisabled: false,
-    isMandatory: false,
-    appVersion: args.appVersion,
-    targetBinaryRange: '',
-    packageHash: '',
-    label: 'Download update - 7.63',
-    packageSize: 0,
+    app_version: args.app_version,
+    app_id: args.app_id,
+    package_id: 'package_id_1',
+    deployment_key: args.deployment_key,
+    label: 'Updating themes in the app',
+    blob_url: 'https://suraj.coolpage.biz/patch-android-2',
+    package_hash: '123',
+    size: 100,
+    is_update_available: true,
+    is_rollout_disabled: false,
   };
 
   return updateCheckInfo;

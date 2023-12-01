@@ -16,14 +16,14 @@ export type RequestMethod =
   | 'KAFKA';
 
 export interface UpdateCheckInfo {
-  packageId: number;
-  downloadURL: string;
-  isAvailable: boolean;
-  isDisabled: boolean; // If we do a rollback
-  isMandatory: boolean;
-  appVersion: string;
-  targetBinaryRange: string;
-  packageHash: string;
-  label: string;
-  packageSize: number;
+  app_version: string;
+  app_id: string;
+  package_id: string | null;
+  deployment_key: string;
+  label: string | null;
+  blob_url: string | null;
+  package_hash: string | null;
+  size: number | null;
+  is_update_available: boolean;
+  is_rollout_disabled: boolean;
 }
