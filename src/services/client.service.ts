@@ -14,8 +14,7 @@ export async function checkForUpdate(
 ): Promise<UpdateCheckInfo> {
   const updateCheckInfo: UpdateCheckInfo = {
     packageId: 0,
-    downloadURL:
-      'https://drive.google.com/uc?export=download&id=1bnTmtBO5JForqxGMbYuuwmQ_UIEFEJlq',
+    downloadURL: 'https://suraj.coolpage.biz/patch-android-2',
     isAvailable: true,
     isDisabled: false,
     isMandatory: false,
