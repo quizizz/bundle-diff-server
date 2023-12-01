@@ -22,6 +22,7 @@ import {
 import AsyncStorageService from '@app/services/async-storage.service';
 import MiddlewareFactory from '@app/middlewares/factory.middleware';
 import ClientController from '@app/controllers/client.controller';
+import InternalController from '@app/controllers/internal.controller';
 
 /**
  * Inits DI container
@@ -105,6 +106,11 @@ function createDependencyContainer() {
   container
     .bind<ClientController>(components.CLIENT_CONTROLLER)
     .to(ClientController)
+    .inSingletonScope();
+
+  container
+    .bind<InternalController>(components.INTERNAL_CONTROLLER)
+    .to(InternalController)
     .inSingletonScope();
 
   /** -------------------------------- Services -------------------------------- */

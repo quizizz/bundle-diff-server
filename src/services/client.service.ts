@@ -1,13 +1,7 @@
 import { ANDROID_APP_ID, IOS_APP_ID } from '@app/constants';
 import { UpdateCheckInfo } from '@app/types';
 import { calculateSHA256 } from '@app/utils/md5';
-
-export interface CheckForUpdateArgs {
-  app_version: string;
-  app_id: string;
-  deployment_key: string;
-  package_id: string | null;
-}
+import { CheckForUpdateArgs } from './types';
 
 const android_patch_url =
   'https://quizizz-static-dev.s3.amazonaws.com/app_bundles/patch-android';

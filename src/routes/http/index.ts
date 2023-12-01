@@ -10,6 +10,7 @@ import type BaseController from '@app/controllers/base.controller';
 import { MetaController, NotFoundController } from '@app/controllers';
 import { HealthController } from '@app/controllers/meta.controller';
 import ClientController from '@app/controllers/client.controller';
+import InternalController from '@app/controllers/internal.controller';
 
 /**
  *
@@ -40,6 +41,8 @@ export class HttpRoutes {
     private notFoundController: NotFoundController,
     @inject(components.CLIENT_CONTROLLER)
     private clientController: ClientController,
+    @inject(components.INTERNAL_CONTROLLER)
+    private internalController: InternalController,
     @inject(components.CONFIG) private config: Config,
     @inject(components.LOGGER) private logger: ILogger,
     @inject(components.MIDDLEWARE_FACTORY)
@@ -77,6 +80,11 @@ export class HttpRoutes {
         method: 'post',
         route: '/client/update_check',
         controller: this.clientController.checkForUpdate(),
+      },
+      {
+        method: 'post',
+        route: '/internal/release_app',
+        controller: this.internalController.releaseApp(),
       },
     ]);
   }

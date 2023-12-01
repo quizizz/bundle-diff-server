@@ -2,19 +2,19 @@ import { Request } from '@app/domains/app';
 import BaseController from './base.controller';
 import is from 'is_js';
 import { injectable } from 'inversify';
-import { checkForUpdate } from '@app/services/client.service';
 import { ANDROID_APP_ID, IOS_APP_ID } from '@app/constants';
-import { CheckForUpdateArgs } from '@app/services/types';
+import { AppReleaseArgs } from '@app/services/types';
+import { releaseApp } from '@app/services/internal.service';
 
 @injectable()
-export default class ClientController {
-  checkForUpdate(): BaseController<
+export default class InternalController {
+  releaseApp(): BaseController<
     {
-      body: CheckForUpdateArgs;
+      body: AppReleaseArgs;
     } & Request
   > {
     return {
-      name: 'check-update-controller',
+      name: 'make-release-controller',
       validate: (req) => {
         const {
           body: { app_version, deployment_key, app_id },
@@ -58,13 +58,13 @@ export default class ClientController {
       },
       async exec(req) {
         const {
-          body: { app_version, deployment_key, package_id, app_id },
+          body: { app_version, deployment_key, app_id, patch_data },
         } = req;
-        const data = await checkForUpdate({
+        const data = await releaseApp({
           app_version: app_version,
           deployment_key: deployment_key,
           app_id: app_id,
-          package_id: package_id,
+          patch_data: patch_data,
         });
         return {
           data: data,

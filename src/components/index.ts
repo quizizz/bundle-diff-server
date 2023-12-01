@@ -24,6 +24,7 @@ export default {
   NOT_FOUND_CONTROLLER: Symbol.for('not_found_controller'),
   EXAMPLE_KAFKA_CONTROLLER: Symbol.for('example_kafka_controller'),
   CLIENT_CONTROLLER: Symbol.for('CLIENT_CONTROLLER'),
+  INTERNAL_CONTROLLER: Symbol.for('INTERNAL_CONTROLLER'),
 
   // services
   ASYNC_STORAGE_SERVICE: Symbol.for('async_storage_service'),
